@@ -34,5 +34,8 @@
             </c:forEach>
         </table>
     </c:if>
+    <form action="new" method="get">
+        <input type="submit" value="Créer"/>
+    </form>
 </body>
 </html>

@@ -12,13 +12,14 @@
     <title></title>
 </head>
 <body>
+
 <table>
     <tr>
         <td align="right">
             Nom :
         </td>
         <td>
-            <input type="text" value="${user.firstname}" disabled="${disabled}"/>
+            <input type="text" value="${user.firstname}" ${disabled}/>
         </td>
     </tr>
     <tr>
@@ -26,7 +27,7 @@
             Prénom :
         </td>
         <td>
-            <input type="text" value="${user.lastname}" disabled="${disabled}"/>
+            <input type="text" value="${user.lastname}" ${disabled}/>
         </td>
     </tr>
     <tr>
@@ -34,7 +35,7 @@
             Date de Naissance :
         </td>
         <td>
-            <input type="text"  value = "<fmt:formatDate value="${user.birthday}" pattern="dd/MM/yyyy"/>" disabled="${disabled}"/>
+            <input type="text" value="<fmt:formatDate value="${user.birthday}" pattern="dd/MM/yyyy"/>" ${disabled}/>
         </td>
     </tr>
     <tr>
@@ -42,7 +43,7 @@
             courriel :
         </td>
         <td>
-            <input type="text"  value = "${user.email}" disabled="${disabled}"/>
+            <input type="text" value="${user.email}" ${disabled}/>
         </td>
     </tr>
     <tr>
@@ -50,10 +51,9 @@
             téléphone :
         </td>
         <td>
-            <input type="text"  value = "${user.phone}" disabled="${disabled}"/>
+            <input type="text" value="${user.phone}" ${disabled}/>
         </td>
     </tr>
-
 </table>
 
 
