@@ -3,6 +3,7 @@ package controller;
 
 import beans.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,8 +17,8 @@ import java.util.List;
 @Controller
 public class UsersController {
 
-    @RequestMapping("/user")
-    public @ResponseBody User getUser(@RequestParam(value = "id", required = true) long id) throws Exception {
+    @RequestMapping("/user/{id}" )
+    public @ResponseBody User getUser(@PathVariable(value = "id") long id) throws Exception {
         return UsersServices.getService().getUser(id);
 
     }
