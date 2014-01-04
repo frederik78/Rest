@@ -30,10 +30,23 @@ public class Users extends HttpServlet {
         if ("user".equals(resource.getResource())) {
             final User user = UsersServices.getService().getUser(resource.getId());
             req.setAttribute("user", user);
-            req.setAttribute("disabled", true);
+            req.setAttribute("disabled", "disabled");
             getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
         }
 
+        if ("new".equals(resource.getResource())) {
+            req.setAttribute("disabled", "");
+            getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
+        }
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+    {
+        final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
+
+
+    }
+
 
 }
