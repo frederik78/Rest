@@ -40,7 +40,7 @@
     </tr>
     <tr>
         <td align="right">
-            courriel :
+            Courriel :
         </td>
         <td>
             <input type="text" value="${user.email}" ${disabled}/>
@@ -48,7 +48,7 @@
     </tr>
     <tr>
         <td align="right">
-            téléphone :
+            Téléphone :
         </td>
         <td>
             <input type="text" value="${user.phone}" ${disabled}/>
