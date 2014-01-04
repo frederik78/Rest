@@ -1,6 +1,8 @@
 package fr.fred.modele;
 
 import fr.fred.beans.User;
+import fr.fred.util.AnalyzeUriResource;
+import fr.fred.util.WebUtil;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
@@ -20,19 +22,24 @@ public class UsersServices {
         return USERS_SERVICES;
     }
 
+    /**
+     * Recherche la liste de tous les utilisateurs
+     * @return la liste de tous les utilisateurs
+     */
     public Collection<User> getListOfUsers() {
-
-        return Arrays.asList(restTemplate.getForObject("http://localhost:971/listOfUsers", User[].class));
+        return Arrays.asList(restTemplate.getForObject(WebUtil.SERVICE_LOCATION + "/listOfUsers", User[].class));
     }
 
-    public User getUser(long id)
-    {
+    /**
+     * Retourne les détails d'un utilisateur
+     * @param id de l'utilisateur dont l'on souhaite obtenir des détails
+     * @return un utilisateur
+     */
+    public User getUser(long id) {
         final Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("id", id);
-        return restTemplate.getForObject("http://localhost:971/user", User.class, parameters);
+        return restTemplate.getForObject(WebUtil.SERVICE_LOCATION + "/user/{id}", User.class, parameters);
     }
-
-
 
 
 }
