@@ -10,7 +10,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <body>
-<form action="users">
     <c:if test="${fn:length(users) > 0}">
         <table>
             <tr>
@@ -27,12 +26,13 @@
                         <fmt:formatDate value="${user.birthday}" pattern="dd/MM/yyyy"/></td>
                     <td>${user.email}</td>
                     <td>
-                        <button onclick="">Détails</button>
+                        <form action="user/${user.id}" method="get" >
+                        <input type="submit" value="Détail" />
+                        </form>
                     </td>
                 </tr>
             </c:forEach>
         </table>
     </c:if>
-</form>
 </body>
 </html>
