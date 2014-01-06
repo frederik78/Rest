@@ -25,7 +25,7 @@ public class AnalyzeUriResource {
 
     public AnalyzeUriResource(HttpServletRequest req) throws ServletException {
 
-        final Pattern regExForAll = Pattern.compile("^" + req.getServletPath() + "/(\\w*)$|^" + req.getServletPath() + "$" );
+        final Pattern regExForAll = Pattern.compile("^" + req.getServletPath() + "/(\\w*/)*(\\w*)$|^" + req.getServletPath() + "$" );
         final Pattern regExForId = Pattern.compile("^" + req.getServletPath() + "/(\\w*)/(\\d*)$");
 
         Matcher matcher = regExForId.matcher(req.getRequestURI());
@@ -35,7 +35,8 @@ public class AnalyzeUriResource {
         } else {
             matcher = regExForAll.matcher(req.getRequestURI());
             if (matcher.find()) {
-                resource = matcher.group(1) != null ? matcher.group(1) : StringUtils.EMPTY;
+
+                resource = matcher.group(matcher.groupCount()) != null ? matcher.group(matcher.groupCount()) : StringUtils.EMPTY;
                 id = NumberUtils.LONG_ZERO;
             }else
             {
