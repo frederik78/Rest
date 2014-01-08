@@ -29,6 +29,10 @@
                         <form action="user/${user.id}" method="get" >
                         <input type="submit" value="Détail" />
                         </form>
+                        <form action="update/${user.id}" method="post" >
+                            <input type="hidden" name="_method" value="PUT"/>
+                            <input type="submit" value="Mise à Jour" />
+                        </form>
                     </td>
                 </tr>
             </c:forEach>
