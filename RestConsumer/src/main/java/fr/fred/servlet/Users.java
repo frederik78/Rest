@@ -36,7 +36,13 @@ public class Users extends HttpServlet {
             if ("user".equals(resource.getResource())) {
                 req.setAttribute("disabled", "disabled");
             }
+            else
+            {
+                req.setAttribute("action", "/user/update");
+                req.setAttribute("operation", "update");
+            }
             req.setAttribute("method", "get");
+
             getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
         }
 
@@ -45,6 +51,8 @@ public class Users extends HttpServlet {
             req.setAttribute("user", user);
             req.setAttribute("disabled", "");
             req.setAttribute("method","post");
+            req.setAttribute("action", "/user/new");
+            req.setAttribute("operation", "create");
             getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
         }
     }

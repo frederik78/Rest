@@ -12,7 +12,7 @@
     <title></title>
 </head>
 <body>
-<form action="user/new" method="${method}">
+<form action="${action}" method="${method}">
 
     <table>
         <tr>
@@ -57,8 +57,11 @@
             </td>
         </tr>
     </table>
-    <c:if test="${method == 'post'}">
+    <c:if test="${operation == 'create'}">
         <input type="submit" value="Créer"/>
+    </c:if>
+    <c:if test="${operation == 'update'}">
+        <input type="submit" value="Modifier"/>
     </c:if>
 </form>
 
