@@ -30,11 +30,13 @@ public class Users extends HttpServlet {
             getServletContext().getRequestDispatcher("/listOfUsers.jsp").forward(req, resp);
         }
 
-        if ("user".equals(resource.getResource())) {
+        if ("user".equals(resource.getResource()) || "update".equals(resource.getResource())) {
             final User user = UsersServices.getService().getUser(resource.getId());
             req.setAttribute("user", user);
-            req.setAttribute("disabled", "disabled");
-            req.setAttribute("method","get");
+            if ("user".equals(resource.getResource())) {
+                req.setAttribute("disabled", "disabled");
+            }
+            req.setAttribute("method", "get");
             getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
         }
 
