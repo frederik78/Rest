@@ -47,10 +47,17 @@ public class Users extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPut(req, resp);
-    }
+//    @Override
+//    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//       final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
+//        if("update".equals((resource.getResource())))
+//        {
+//            UsersServices.getService().updateUser();
+//            getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
+//        }
+//
+//
+//    }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -61,24 +68,35 @@ public class Users extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
         if ("new".equals(resource.getResource())) {
-            final User user = new User();
-            user.setFirstname(req.getParameter("firstname"));
-            user.setLastname(req.getParameter("lastname"));
-            user.setEmail(req.getParameter("email"));
-            user.setPhone(req.getParameter("phone"));
-
-            final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            final Date birthDay;
-            try {
-                birthDay = simpleDateFormat.parse(req.getParameter("birthday"));
-            } catch (ParseException e) {
-                throw new ServletException("Mauvaise saisie de date");
-            }
-            user.setBirthday(birthDay);
+            final User user = initializeUserFromView(req);
             UsersServices.getService().createUser(user);
             resp.sendRedirect("/users/");
         }
 
+    }
+
+    /**
+     * Initialise les champs utilisateurs avec ceux saisis sur la vue
+     * @param req requête HTTP
+     * @return une instance de User dont les champs sont initialisés
+     * @throws ServletException en cas d'erreur
+     */
+    private User initializeUserFromView(HttpServletRequest req) throws ServletException {
+        final User user = new User();
+        user.setFirstname(req.getParameter("firstname"));
+        user.setLastname(req.getParameter("lastname"));
+        user.setEmail(req.getParameter("email"));
+        user.setPhone(req.getParameter("phone"));
+
+        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        final Date birthDay;
+        try {
+            birthDay = simpleDateFormat.parse(req.getParameter("birthday"));
+        } catch (ParseException e) {
+            throw new ServletException("Mauvaise saisie de date");
+        }
+        user.setBirthday(birthDay);
+        return user;
     }
 
 
