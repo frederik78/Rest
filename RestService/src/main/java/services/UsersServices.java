@@ -49,6 +49,11 @@ public class UsersServices {
         return user;
     }
 
+    public void updateUser(User user)
+    {
+        result.put(user.getId(), user);
+    }
+
 
     private static void generateUsers() throws ParseException {
         final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
