@@ -25,13 +25,14 @@ public class AnalyzeUriResource {
 
     public AnalyzeUriResource(HttpServletRequest req) throws ServletException {
 
-        final Pattern regExForAll = Pattern.compile("^" + req.getServletPath() + "/(\\w*/)*(\\w*)$|^" + req.getServletPath() + "$" );
-        final Pattern regExForId = Pattern.compile("^" + req.getServletPath() + "/(\\w*)/(\\d*)$");
+        final Pattern regExForAll = Pattern.compile("^" + req.getServletPath() + "/(\\w*/)*(\\D*)$|^" + req.getServletPath() + "$" );
+        final Pattern regExForId = Pattern.compile("^" + req.getServletPath() + "/(\\w*/)*(\\d.*)$");
 
         Matcher matcher = regExForId.matcher(req.getRequestURI());
         if (matcher.find()) {
-            resource = matcher.group(1);
-            id = Long.parseLong(matcher.group(2));
+            resource = matcher.group(matcher.groupCount() - 1);
+            resource = StringUtils.remove(resource,"/");
+            id = Long.parseLong(matcher.group(matcher.groupCount()));
         } else {
             matcher = regExForAll.matcher(req.getRequestURI());
             if (matcher.find()) {
