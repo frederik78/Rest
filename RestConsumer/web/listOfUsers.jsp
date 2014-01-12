@@ -34,8 +34,7 @@
                                 </form>
                             </th>
                             <th>
-                                <form action="update/${user.id}" method="get">
-                                        <%--<input type="hidden" name="_method" value="PUT"/>--%>
+                                <form action="user/update/${user.id}" method="get">
                                     <input type="submit" value="Mise à Jour"/>
                                 </form>
                             </th>

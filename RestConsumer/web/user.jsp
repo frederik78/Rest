@@ -58,9 +58,11 @@
         </tr>
     </table>
     <c:if test="${operation == 'create'}">
+        <input type="hidden" name="_method" value="POST"/>
         <input type="submit" value="Créer"/>
     </c:if>
     <c:if test="${operation == 'update'}">
+        <input type="hidden" name="_method" value="PUT"/>
         <input type="submit" value="Modifier"/>
     </c:if>
 </form>

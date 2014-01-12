@@ -30,19 +30,20 @@ public class Users extends HttpServlet {
             getServletContext().getRequestDispatcher("/listOfUsers.jsp").forward(req, resp);
         }
 
-        if ("user".equals(resource.getResource()) || "update".equals(resource.getResource())) {
+        if ("user".equals(resource.getResource())) {
             final User user = UsersServices.getService().getUser(resource.getId());
             req.setAttribute("user", user);
-            if ("user".equals(resource.getResource())) {
-                req.setAttribute("disabled", "disabled");
-            }
-            else
-            {
-                req.setAttribute("action", "/user/update");
-                req.setAttribute("operation", "update");
-            }
+            req.setAttribute("disabled", "disabled");
             req.setAttribute("method", "get");
 
+            getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
+        }
+        if ("update".equals(resource.getResource())) {
+            final User user = UsersServices.getService().getUser(resource.getId());
+            req.setAttribute("user", user);
+            req.setAttribute("action", "user/update");
+            req.setAttribute("operation", "update");
+            req.setAttribute("method", "post");
             getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
         }
 
@@ -51,7 +52,7 @@ public class Users extends HttpServlet {
             req.setAttribute("user", user);
             req.setAttribute("disabled", "");
             req.setAttribute("method","post");
-            req.setAttribute("action", "/user/new");
+            req.setAttribute("action", "user/new");
             req.setAttribute("operation", "create");
             getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
         }
