@@ -47,17 +47,29 @@ public class Users extends HttpServlet {
         }
     }
 
-//    @Override
-//    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//       final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
-//        if("update".equals((resource.getResource())))
-//        {
-//            UsersServices.getService().updateUser();
-//            getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
-//        }
-//
-//
-//    }
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
+        updateUser(req, resp, resource);
+
+
+    }
+
+    /**
+     * Mise à jour de l'utilisateur
+     * @param req HTTP Request
+     * @param resp HTTP Response
+     * @param resource décomposition REST
+     * @throws ServletException en cas d'erreur
+     */
+    private void updateUser(HttpServletRequest req, HttpServletResponse resp, AnalyzeUriResource resource) throws ServletException, IOException {
+        if("update".equals((resource.getResource())))
+        {
+            final User user = initializeUserFromView(req);
+            UsersServices.getService().updateUser(user);
+            getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
+        }
+    }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
