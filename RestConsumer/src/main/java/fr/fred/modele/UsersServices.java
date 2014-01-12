@@ -57,5 +57,14 @@ public class UsersServices {
         return restTemplate.postForObject(WebUtil.SERVICE_LOCATION + "/users/new", user, User.class);
     }
 
+    /**
+     * Met à jour un utilisateur
+     * @param user qu'il faut mettre à jour
+     */
+    public void updateUser(User user)
+    {
+
+    }
+
 
 }
