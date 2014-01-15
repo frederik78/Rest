@@ -35,8 +35,14 @@
                             </th>
                             <th>
                                 <form action="user/${user.id}" method="get">
-                                     <input type="hidden" name="update" value="true" id="update"/>
+                                     <input type="hidden" name="update" value="true"/>
                                     <input type="submit" value="Mise à Jour"/>
+                                </form>
+                            </th>
+                            <th>
+                                <form action="user/${user.id}" method="post">
+                                    <input type="hidden" name="_method" value="DELETE"/>
+                                    <input type="submit" value="Suppression"/>
                                 </form>
                             </th>
                         </tr>
