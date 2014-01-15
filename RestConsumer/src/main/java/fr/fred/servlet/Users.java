@@ -66,8 +66,6 @@ public class Users extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
         updateUser(req, resp, resource);
-
-
     }
 
     /**
@@ -82,14 +80,18 @@ public class Users extends HttpServlet {
         {
             final User user = initializeUserFromView(req, resource.getId());
             UsersServices.getService().updateUser(user);
-            //getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
             resp.sendRedirect("/users/");
         }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp);
+        final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
+        if("user".equals((resource.getResource())))
+        {
+            UsersServices.getService().delete(resource.getId());
+            resp.sendRedirect("/users/");
+        }
     }
 
     @Override

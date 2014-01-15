@@ -66,5 +66,14 @@ public class UsersServices {
         restTemplate.put(WebUtil.SERVICE_LOCATION +"/users/user/{id}", user, user.getId());
     }
 
+    /**
+     * Suppression d'un utilisateur
+     * @param id
+     */
+    public void delete(long id)
+    {
+        restTemplate.delete(WebUtil.SERVICE_LOCATION + "/users/user/{id}", id);
+    }
+
 
 }
