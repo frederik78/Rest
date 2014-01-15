@@ -7,13 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-  <form method="post" action="login">
+<% response.sendRedirect("login.jsp"); %>
 
-      <label for="login">Identifiant : </label>
-      <input id="login" type="text" />
-      <label for="password">Mot de passe : </label>
-      <input id="password" type="password" />
-      <input name="Valider" type="submit"  />
-
-  </form>
 
