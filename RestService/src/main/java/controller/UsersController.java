@@ -2,6 +2,7 @@ package controller;
 
 
 import beans.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import services.UsersServices;
@@ -29,6 +30,17 @@ public class UsersController {
     @RequestMapping(value = "/users/new", method = RequestMethod.POST)
     public @ResponseBody User createUser(@RequestBody User user) throws Exception {
         return UsersServices.getService().createUser(user);
+    }
+
+    /**
+     * Met à jour un utilisateur
+     * @param user qu'il faut mettre à jour
+     */
+    @RequestMapping(value = "/users/user/{id}", method = RequestMethod.PUT  )
+    @ResponseStatus(HttpStatus.OK)
+    public void updateUser(@RequestBody User user, @PathVariable long id) throws Exception
+    {
+        UsersServices.getService().updateUser(user);
     }
 
 }
