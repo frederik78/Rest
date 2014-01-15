@@ -33,17 +33,20 @@ public class Users extends HttpServlet {
         if ("user".equals(resource.getResource())) {
             final User user = UsersServices.getService().getUser(resource.getId());
             req.setAttribute("user", user);
-            req.setAttribute("disabled", "disabled");
-            req.setAttribute("method", "get");
 
-            getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
-        }
-        if ("update".equals(resource.getResource())) {
-            final User user = UsersServices.getService().getUser(resource.getId());
-            req.setAttribute("user", user);
-            req.setAttribute("action", "user/update");
-            req.setAttribute("operation", "update");
-            req.setAttribute("method", "post");
+
+            if(req.getParameter("update") != null)
+            {
+                req.setAttribute("disabled", "");
+                req.setAttribute("method", "post");
+                req.setAttribute("action", "");
+                req.setAttribute("operation", "update");
+            }
+            else{
+                req.setAttribute("disabled", "disabled");
+                req.setAttribute("method", "get");
+            }
+
             getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
         }
 
@@ -56,6 +59,7 @@ public class Users extends HttpServlet {
             req.setAttribute("operation", "create");
             getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
         }
+
     }
 
     @Override
@@ -74,11 +78,12 @@ public class Users extends HttpServlet {
      * @throws ServletException en cas d'erreur
      */
     private void updateUser(HttpServletRequest req, HttpServletResponse resp, AnalyzeUriResource resource) throws ServletException, IOException {
-        if("update".equals((resource.getResource())))
+        if("user".equals((resource.getResource())))
         {
-            final User user = initializeUserFromView(req);
+            final User user = initializeUserFromView(req, resource.getId());
             UsersServices.getService().updateUser(user);
-            getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
+            //getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
+            resp.sendRedirect("/users/");
         }
     }
 
@@ -91,7 +96,7 @@ public class Users extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
         if ("new".equals(resource.getResource())) {
-            final User user = initializeUserFromView(req);
+            final User user = initializeUserFromView(req, null);
             UsersServices.getService().createUser(user);
             resp.sendRedirect("/users/");
         }
@@ -104,8 +109,8 @@ public class Users extends HttpServlet {
      * @return une instance de User dont les champs sont initialisés
      * @throws ServletException en cas d'erreur
      */
-    private User initializeUserFromView(HttpServletRequest req) throws ServletException {
-        final User user = new User();
+    private User initializeUserFromView(HttpServletRequest req, Long id) throws ServletException {
+        final User user = id == null ? new User() : UsersServices.getService().getUser(id);
         user.setFirstname(req.getParameter("firstname"));
         user.setLastname(req.getParameter("lastname"));
         user.setEmail(req.getParameter("email"));

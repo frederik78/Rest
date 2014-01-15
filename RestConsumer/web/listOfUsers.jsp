@@ -34,7 +34,8 @@
                                 </form>
                             </th>
                             <th>
-                                <form action="user/update/${user.id}" method="get">
+                                <form action="user/${user.id}" method="get">
+                                     <input type="hidden" name="update" value="true" id="update"/>
                                     <input type="submit" value="Mise à Jour"/>
                                 </form>
                             </th>
