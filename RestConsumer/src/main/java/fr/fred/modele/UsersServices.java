@@ -63,7 +63,7 @@ public class UsersServices {
      */
     public void updateUser(User user)
     {
-
+        restTemplate.put(WebUtil.SERVICE_LOCATION +"/users/user/{id}", user, user.getId());
     }
 
 
