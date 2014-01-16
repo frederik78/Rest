@@ -47,7 +47,7 @@ public class Users extends HttpServlet {
                 req.setAttribute("method", "get");
             }
 
-            getServletContext().getRequestDispatcher(req.getContextPath()+ "/user.jsp").forward(req, resp);
+            getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
         }
 
         if ("new".equals(resource.getResource())) {
@@ -57,7 +57,7 @@ public class Users extends HttpServlet {
             req.setAttribute("method","post");
             req.setAttribute("action", "user/new");
             req.setAttribute("operation", "create");
-            getServletContext().getRequestDispatcher(req.getContextPath()+"/user.jsp").forward(req, resp);
+            getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
         }
 
     }
@@ -80,7 +80,7 @@ public class Users extends HttpServlet {
         {
             final User user = initializeUserFromView(req, resource.getId());
             UsersServices.getService().updateUser(user);
-            resp.sendRedirect("/users/");
+            resp.sendRedirect(req.getContextPath()+"/users/");
         }
     }
 
@@ -90,7 +90,7 @@ public class Users extends HttpServlet {
         if("user".equals((resource.getResource())))
         {
             UsersServices.getService().delete(resource.getId());
-            resp.sendRedirect("/users/");
+            resp.sendRedirect(req.getContextPath()+"/users/");
         }
     }
 
@@ -100,7 +100,7 @@ public class Users extends HttpServlet {
         if ("new".equals(resource.getResource())) {
             final User user = initializeUserFromView(req, null);
             UsersServices.getService().createUser(user);
-            resp.sendRedirect("/users/");
+            resp.sendRedirect(req.getContextPath()+"/users/");
         }
 
     }

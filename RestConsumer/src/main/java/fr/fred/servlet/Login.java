@@ -20,6 +20,6 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String login = (String) req.getParameter("login");
         final String password = (String) req.getParameter("password");
-        resp.sendRedirect("/users/");
+        resp.sendRedirect(req.getContextPath()+"/users/");
     }
 }
