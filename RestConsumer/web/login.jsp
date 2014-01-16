@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form method="post" action="login">
+<form method="post" >
 
     <label for="login">Identifiant : </label>
     <input id="login" type="text" />
