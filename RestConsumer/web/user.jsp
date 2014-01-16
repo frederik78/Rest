@@ -9,10 +9,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <script type="text/javascript">
+        function redirect(){
+            document.userInformation.action =  "${pageContext.request.contextPath}" + "/users/";
+            document.userInformation.method ="get";
+            document.userInformation.forward("${pageContext.request.contextPath}" + "/users/");
+            return true;
+        }
+    </script>
 </head>
 <body>
-<form action="${action}" method="${method}">
+
+<form name="userInformation" action="${action}" method="${method}">
 
     <table>
         <tr>
@@ -57,6 +65,9 @@
             </td>
         </tr>
     </table>
+    <table>
+      <tr>
+    <th>
     <c:if test="${operation == 'create'}">
         <input type="hidden" name="_method" value="POST"/>
         <input type="submit" value="Créer"/>
@@ -65,6 +76,12 @@
         <input type="hidden" name="_method" value="PUT"/>
         <input type="submit" value="Modifier"/>
     </c:if>
+    </th>
+          <th>
+              <input type="submit" value="Retour" onclick="redirect();"/>
+          </th>
+      </tr>
+    </table>
 </form>
 
 

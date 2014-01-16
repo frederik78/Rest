@@ -47,7 +47,7 @@ public class Users extends HttpServlet {
                 req.setAttribute("method", "get");
             }
 
-            getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
+            getServletContext().getRequestDispatcher(req.getContextPath()+ "/user.jsp").forward(req, resp);
         }
 
         if ("new".equals(resource.getResource())) {
@@ -57,7 +57,7 @@ public class Users extends HttpServlet {
             req.setAttribute("method","post");
             req.setAttribute("action", "user/new");
             req.setAttribute("operation", "create");
-            getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
+            getServletContext().getRequestDispatcher(req.getContextPath()+"/user.jsp").forward(req, resp);
         }
 
     }
