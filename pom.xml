@@ -5,11 +5,10 @@
 
 	<groupId>fr.fred</groupId>
 	<artifactId>rest</artifactId>
-	<version>${rest.version}</version>
+	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
-		<rest.version>1.0-SNAPSHOT</rest.version>
 		<compiler.version>1.6</compiler.version>
 		<project.build.encoding>ISO-8859-15</project.build.encoding>
 	</properties>

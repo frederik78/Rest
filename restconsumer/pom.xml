@@ -10,7 +10,7 @@
     <parent>
         <groupId>fr.fred</groupId>
         <artifactId>rest</artifactId>
-        <version>${rest.version}</version>
+		<version>1.0-SNAPSHOT</version>
     </parent>
 
     <dependencies>
