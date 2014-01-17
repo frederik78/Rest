@@ -13,6 +13,12 @@
 		<project.build.encoding>ISO-8859-15</project.build.encoding>
 	</properties>
 
+	<scm>
+		<connection>scm:git:ssh://git@github.com:frederik78/Rest.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:frederik78/Rest.git</developerConnection>
+		<url>http://git@github.com:frederik78/Rest.git</url>
+	</scm>
+
 	<modules>
 		<module>restconsumer</module>
 		<module>restservice</module>
