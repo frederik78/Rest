@@ -21,91 +21,119 @@ import java.util.Date;
 public class Users extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+    {
 
-        final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
-        if ("".equals(resource.getResource())) {
-            final Collection<User> users = UsersServices.getService().getListOfUsers();
-            req.setAttribute("users", users);
-            getServletContext().getRequestDispatcher("/listOfUsers.jsp").forward(req, resp);
-        }
+       final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
+       showListForm(req, resp, resource);
 
-        if ("user".equals(resource.getResource())) {
-            final User user = UsersServices.getService().getUser(resource.getId());
-            req.setAttribute("user", user);
+       showDetailOrUpdateForm(req, resp, resource);
 
-
-            if(req.getParameter("update") != null)
-            {
-                req.setAttribute("disabled", "");
-                req.setAttribute("method", "post");
-                req.setAttribute("action", "");
-                req.setAttribute("operation", "update");
-            }
-            else{
-                req.setAttribute("disabled", "disabled");
-                req.setAttribute("method", "get");
-            }
-
-            getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
-        }
-
-        if ("new".equals(resource.getResource())) {
-            final User user = new User();
-            req.setAttribute("user", user);
-            req.setAttribute("disabled", "");
-            req.setAttribute("method","post");
-            req.setAttribute("action", "user/new");
-            req.setAttribute("operation", "create");
-            getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
-        }
+       showCreateForm(req, resp, resource);
 
     }
 
-    @Override
+   @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
         updateUser(req, resp, resource);
     }
 
-    /**
-     * Mise à jour de l'utilisateur
-     * @param req HTTP Request
-     * @param resp HTTP Response
-     * @param resource décomposition REST
-     * @throws ServletException en cas d'erreur
-     */
-    private void updateUser(HttpServletRequest req, HttpServletResponse resp, AnalyzeUriResource resource) throws ServletException, IOException {
-        if("user".equals((resource.getResource())))
-        {
-            final User user = initializeUserFromView(req, resource.getId());
-            UsersServices.getService().updateUser(user);
-            resp.sendRedirect(req.getContextPath()+"/users/");
-        }
-    }
-
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
-        if("user".equals((resource.getResource())))
-        {
-            UsersServices.getService().delete(resource.getId());
-            resp.sendRedirect(req.getContextPath()+"/users/");
-        }
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+    {
+       final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
+       deleteUser(req, resp, resource);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
-        if ("new".equals(resource.getResource())) {
-            final User user = initializeUserFromView(req, null);
-            UsersServices.getService().createUser(user);
-            resp.sendRedirect(req.getContextPath()+"/users/");
-        }
+   @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+   {
+      final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
+      createUser(req, resp, resource);
 
-    }
+   }
 
-    /**
+   /**
+    * Mise à jour de l'utilisateur
+    * @param req HTTP Request
+    * @param resp HTTP Response
+    * @param resource décomposition REST
+    * @throws ServletException en cas d'erreur
+    */
+   private void updateUser(HttpServletRequest req, HttpServletResponse resp, AnalyzeUriResource resource) throws ServletException, IOException {
+      if("user".equals((resource.getResource())))
+      {
+         final User user = initializeUserFromView(req, resource.getId());
+         UsersServices.getService().updateUser(user);
+         resp.sendRedirect(req.getContextPath()+"/users/");
+      }
+   }
+
+   private void showListForm(HttpServletRequest req, HttpServletResponse resp, AnalyzeUriResource resource) throws ServletException, IOException
+   {
+      if ("".equals(resource.getResource())) {
+         final Collection<User> users = UsersServices.getService().getListOfUsers();
+         req.setAttribute("users", users);
+         getServletContext().getRequestDispatcher("/listOfUsers.jsp").forward(req, resp);
+      }
+   }
+
+   private void deleteUser(HttpServletRequest req, HttpServletResponse resp, AnalyzeUriResource resource) throws IOException
+   {
+      if("user".equals((resource.getResource())))
+      {
+         UsersServices.getService().delete(resource.getId());
+         resp.sendRedirect(req.getContextPath()+"/users/");
+      }
+   }
+
+   private void showDetailOrUpdateForm(HttpServletRequest req, HttpServletResponse resp, AnalyzeUriResource resource) throws ServletException, IOException
+   {
+      if ("user".equals(resource.getResource())) {
+         final User user = UsersServices.getService().getUser(resource.getId());
+         req.setAttribute("user", user);
+
+
+         if(req.getParameter("update") != null)
+         {
+            req.setAttribute("disabled", "");
+            req.setAttribute("method", "post");
+            req.setAttribute("action", "");
+            req.setAttribute("operation", "update");
+         }
+         else{
+            req.setAttribute("disabled", "disabled");
+            req.setAttribute("method", "get");
+         }
+
+         getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
+      }
+   }
+
+   private void showCreateForm(HttpServletRequest req, HttpServletResponse resp, AnalyzeUriResource resource) throws ServletException, IOException
+   {
+      if ("new".equals(resource.getResource())) {
+         final User user = new User();
+         req.setAttribute("user", user);
+         req.setAttribute("disabled", "");
+         req.setAttribute("method","post");
+         req.setAttribute("action", "user/new");
+         req.setAttribute("operation", "create");
+         getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
+      }
+   }
+
+   private void createUser(HttpServletRequest req, HttpServletResponse resp, AnalyzeUriResource resource) throws ServletException, IOException
+   {
+      if ("new".equals(resource.getResource())) {
+          final User user = initializeUserFromView(req, null);
+          UsersServices.getService().createUser(user);
+          resp.sendRedirect(req.getContextPath()+"/users/");
+      }
+   }
+
+   /**
      * Initialise les champs utilisateurs avec ceux saisis sur la vue
      * @param req requête HTTP
      * @return une instance de User dont les champs sont initialisés
