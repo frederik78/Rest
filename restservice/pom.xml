@@ -5,7 +5,7 @@
 
     <groupId>fr.fred</groupId>
     <artifactId>restservice</artifactId>
-    <version>${rest.version}</version>
+
 
     <parent>
         <groupId>fr.fred</groupId>

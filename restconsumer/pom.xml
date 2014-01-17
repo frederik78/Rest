@@ -5,7 +5,6 @@
 
     <groupId>fr.fred</groupId>
     <artifactId>restconsumer</artifactId>
-    <version>${rest.version}</version>
     <packaging>war</packaging>
 
     <parent>
