@@ -1,16 +1,12 @@
 package fr.fred.modele;
 
 import fr.fred.beans.User;
-import fr.fred.util.AnalyzeUriResource;
 import fr.fred.util.WebUtil;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.*;
 
 /**
  * Created by Frederic on 28/12/13.
