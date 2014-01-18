@@ -1,12 +1,13 @@
-package controller;
+package fr.fred.controller;
 
 
-import beans.User;
-import java.util.Collection;
+import fr.fred.beans.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import services.UsersServices;
+import fr.fred.services.UsersServices;
+
+import java.util.Collection;
 
 @Controller
 public class UsersController {

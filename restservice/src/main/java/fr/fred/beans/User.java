@@ -1,4 +1,4 @@
-package beans;
+package fr.fred.beans;
 
 import java.util.Date;
 

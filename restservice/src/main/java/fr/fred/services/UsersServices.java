@@ -1,11 +1,13 @@
-package services;
+package fr.fred.services;
 
-import beans.User;
+import fr.fred.beans.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
