@@ -3,7 +3,7 @@ resttuto
 
 Il y a deux projets.
 
-restservice et restconsume
+###restservice & restconsume
 
 restservice fournit des founit les services REST.
 
@@ -20,5 +20,7 @@ Pour l'éxécuter il suffit de taper
 
 restconsume propose une interface cliente qui accède au fournisseur de service.
 Outre une page de login/password (un clic sur le bouton 'Valider' suffit à passer à l'écran suivant), restconsume permet de visualiser, créer modifier, supprimer des utilisateurs.
+Il y a aussi un fichier application.properties qui indique quelle est l'adresse et le port d'écoute de restservice.
+Par défaut le nom du serveur distant est localhost et le port d'écoute 8181.
 
 Contrairement à restservice, restconsumer ne repose pas sur un serveur embarqué.
