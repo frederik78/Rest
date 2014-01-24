@@ -4,27 +4,30 @@ import fr.fred.beans.User;
 import fr.fred.modele.UsersServices;
 import fr.fred.util.AnalyzeUriResource;
 import fr.fred.util.WebUtil;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by Frederic on 28/12/13.
  */
 public class Users extends HttpServlet {
 
-    @Override
+   final private static Logger logger = LoggerFactory.getLogger(Users.class);
+
+   @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-
        final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
+       logger.info("doGet method. Resource : {}; id : {}", resource.getResource(), resource.getId());
        showListForm(req, resp, resource);
 
        showDetailOrUpdateForm(req, resp, resource);
@@ -36,6 +39,7 @@ public class Users extends HttpServlet {
    @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
+      logger.info("doPut method. Resource : {}; id : {}", resource.getResource(), resource.getId());
         updateUser(req, resp, resource);
     }
 
@@ -43,6 +47,7 @@ public class Users extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
        final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
+       logger.info("doDelete method. Resource : {}; id : {}", resource.getResource(), resource.getId());
        deleteUser(req, resp, resource);
     }
 
@@ -50,6 +55,7 @@ public class Users extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
    {
       final AnalyzeUriResource resource = WebUtil.analyzeUriResource(req);
+      logger.info("doPost method. Resource : {}; id : {}", resource.getResource(), resource.getId());
       createUser(req, resp, resource);
 
    }
