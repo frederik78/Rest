@@ -3,7 +3,7 @@ resttuto
 
 Il y a deux projets.
 
-###restservice & restconsume
+###restservice & restconsumer
 
 * restservice 
 founit les services REST. Il repose sur spring-boot (et donc un serveur tomcat 7 embarqué) et spring-rest.
